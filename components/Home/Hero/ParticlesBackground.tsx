@@ -2,7 +2,7 @@ import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { useEffect, useMemo, useState } from "react";
 import { loadSlim } from "@tsparticles/slim"; // if you are going to use `loadSlim`, install the "@tsparticles/slim" package too.
 
-const ParticlesComponent = (props) => {
+const ParticlesComponent = (props: { id?: string }) => {
 
   const [init, setInit] = useState(false);
   useEffect(() => {
@@ -13,7 +13,7 @@ const ParticlesComponent = (props) => {
     });
   }, []);
 
-  const particlesLoaded = (container) => {
+  const particlesLoaded = async (container?: any) => {
     console.log(container);
   };
 
@@ -60,10 +60,10 @@ const ParticlesComponent = (props) => {
           width: 1,
         },
         move: {
-          direction: "none",
+          direction: "none" as const,
           enable: true,
           outModes: {
-            default: "bounce",
+            default: "bounce" as const,
           },
           random: true,
           speed: 1,
@@ -91,7 +91,7 @@ const ParticlesComponent = (props) => {
   );
 
 
-  return <Particles id={props.id} init={particlesLoaded} options={options} className="absolute inset-0 " />;
+  return <Particles id={props.id} particlesLoaded={particlesLoaded} options={options} className="absolute inset-0 " />;
 };
 
 export default ParticlesComponent;

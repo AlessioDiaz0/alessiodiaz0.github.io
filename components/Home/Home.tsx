@@ -7,6 +7,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
 import Experience from './Experience/Experience';
 import Skills from './Skills/Skills';
+import Projects from './Projects/Projects';
 
 const Home = () => {
   useEffect(() => {
@@ -27,6 +28,9 @@ const Home = () => {
       </div>
       <div id="experience">
         <Experience />
+      </div>
+      <div id="projects">
+        <Projects />
       </div>
       <div id="skills">
         <Skills />

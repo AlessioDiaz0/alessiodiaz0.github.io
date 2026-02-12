@@ -1,0 +1,213 @@
+.experience-section {
+    width: 100%;
+    padding: 100px 20px;
+    background: #0d0d1f;
+    position: relative;
+    overflow: hidden;
+}
+
+.experience-section::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 40%;
+    height: 40%;
+    background: radial-gradient(circle, rgba(0, 242, 254, 0.05) 0%, transparent 70%);
+    z-index: 0;
+}
+
+.experience-section::after {
+    content: '';
+    position: absolute;
+    bottom: -10%;
+    right: -10%;
+    width: 50%;
+    height: 50%;
+    background: radial-gradient(circle, rgba(122, 79, 254, 0.05) 0%, transparent 70%);
+    z-index: 0;
+}
+
+.experience-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.experience-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 60px;
+    background: linear-gradient(135deg, #fff 0%, #a0a0b0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+
+.panels-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.panel {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.panel:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 242, 254, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.panel-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.panel-title svg {
+    color: #00f2fe;
+}
+
+/* Education & Certificates Styles */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 30px;
+    border-left: 2px solid rgba(0, 242, 254, 0.2);
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #00f2fe;
+    box-shadow: 0 0 10px #00f2fe;
+}
+
+.item-date {
+    font-size: 0.9rem;
+    color: #00f2fe;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.item-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.item-org {
+    font-size: 1rem;
+    color: #a0a0b0;
+}
+
+/* Soft Skills Styles */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 20px;
+}
+
+.soft-skill-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.soft-skill-card:hover {
+    background: rgba(0, 242, 254, 0.1);
+    border-color: rgba(0, 242, 254, 0.2);
+    transform: scale(1.05);
+}
+
+.soft-skill-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #e0e0e0;
+}
+
+/* Certificate Link Styles */
+.certificate-link {
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.certificate-link::after {
+    content: '→';
+    font-size: 1rem;
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: all 0.3s ease;
+    color: #00f2fe;
+}
+
+.certificate-link:hover {
+    color: #00f2fe;
+}
+
+.certificate-link:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.item-spec {
+    font-size: 0.95rem;
+    color: #a0a0b0;
+    font-style: italic;
+    margin-bottom: 4px;
+    line-height: 1.4;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .panels-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .experience-title {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .panel {
+        padding: 25px;
+    }
+
+    .panel-title {
+        font-size: 1.5rem;
+    }
+}

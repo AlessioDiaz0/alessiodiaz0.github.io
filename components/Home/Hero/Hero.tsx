@@ -25,21 +25,33 @@ const Hero = () => {
                 <h2 data-aos="fade-up" data-aos-delay="400" className="mt-5 text-sm px-2 text-center sm:text-2xl font-medium flex items-center">
                     Hi! I am Alessio a passionate
                     <span className="text-cyan-200 font-bold">
-                        <Typewriter options={{
-                            strings: [
-                                'Frontend Developer',
-                                'LLM Developer',
-                                'Computer Vision Researcher',
-                                'Agentic AI Developer',
-                                'Backend Developer'
-                            ],
-                            autoStart: true,
-                            loop: true,
-                            delay: 30,
-                            deleteSpeed: 25,
-                            pauseFor: 2500,
-                            wrapperClassName: "pl-2"
-                        }} />
+                        <Typewriter
+                            onInit={(typewriter) => {
+                                typewriter
+                                    .typeString('Frontend Developer')
+                                    .pauseFor(2500)
+                                    .deleteAll()
+                                    .typeString('LLM Developer')
+                                    .pauseFor(2500)
+                                    .deleteAll()
+                                    .typeString('Computer Vision Researcher')
+                                    .pauseFor(2500)
+                                    .deleteAll()
+                                    .typeString('Agentic AI Developer')
+                                    .pauseFor(2500)
+                                    .deleteAll()
+                                    .typeString('Backend Developer')
+                                    .pauseFor(2500)
+                                    .deleteAll()
+                                    .start();
+                            }}
+                            options={{
+                                loop: true,
+                                delay: 30,
+                                deleteSpeed: 25,
+                                wrapperClassName: "pl-2"
+                            }}
+                        />
                     </span>
                 </h2>
             </div>

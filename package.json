@@ -2,7 +2,10 @@
   "name": "alessiodiaz.github.io",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://AlessioDiaz0.github.io/alessiodiaz.github.io",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d out",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -28,6 +31,7 @@
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "gh-pages": "^6.3.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

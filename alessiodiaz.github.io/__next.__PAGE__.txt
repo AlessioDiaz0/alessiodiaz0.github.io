@@ -1,7 +1,0 @@
-1:"$Sreact.fragment"
-2:I[90483,["/alessiodiaz.github.io/_next/static/chunks/ff1a16fafef87110.js","/alessiodiaz.github.io/_next/static/chunks/3bb0c3ccbbf5ff0c.js","/alessiodiaz.github.io/_next/static/chunks/ac26e091a397de22.js","/alessiodiaz.github.io/_next/static/chunks/e5b24dd475202cfc.js"],"default"]
-3:I[97367,["/alessiodiaz.github.io/_next/static/chunks/ff1a16fafef87110.js","/alessiodiaz.github.io/_next/static/chunks/f3e35d9a80465ef3.js"],"OutletBoundary"]
-4:"$Sreact.suspense"
-:HL["/alessiodiaz.github.io/_next/static/chunks/1bf49e1194b51e8d.css","style"]
-0:{"buildId":"JCtq3qiJYEHKaxB6UUOS4","rsc":["$","$1","c",{"children":[["$","$L2",null,{}],[["$","link","0",{"rel":"stylesheet","href":"/alessiodiaz.github.io/_next/static/chunks/1bf49e1194b51e8d.css","precedence":"next"}],["$","script","script-0",{"src":"/alessiodiaz.github.io/_next/static/chunks/e5b24dd475202cfc.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"loading":null,"isPartial":false}
-5:null

@@ -30,7 +30,7 @@ const projects = [
 
 const Projects = () => {
     return (
-        <section className="bg-black py-32 px-6 md:px-12 text-white" id="projects">
+        <section className="bg-black py-32 px-6 md:px-12 text-white -scroll-mt-[30vh]" id="projects">
             <div className="max-w-5xl mx-auto">
                 <h2 className="text-4xl md:text-5xl font-bold mb-24 py-4 px-2 leading-tight text-center bg-linear-to-br from-white to-[#a0a0b0] bg-clip-text text-transparent tracking-tight" data-aos="fade-up">
                     Recent Projects
@@ -58,7 +58,7 @@ const Projects = () => {
                                 </div>
                             </div>
 
-                            <div className="flex justify-between items-start border-t border-white/20 pt-6">
+                            <div className="flex justify-center md:justify-between items-center md:items-start border-t border-white/20 pt-6 text-center md:text-left">
                                 <div className="space-y-2 text-center md:text-left">
                                     <h3 className="text-2xl font-bold tracking-tight">
                                         {project.title}

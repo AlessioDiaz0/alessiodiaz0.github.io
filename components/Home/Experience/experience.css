@@ -62,11 +62,171 @@
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: flex;
     flex-direction: column;
+    position: relative;
+    overflow: visible;
+    /* Allow the expanded quote to cover full panel */
 }
 
 .panel-quote-container {
     margin-top: auto;
+    position: relative;
+    padding: 2px;
+    /* space for the animated border */
+    border-radius: 12px;
+    background: transparent;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
 }
+
+/* The rotating conic-gradient border */
+.panel-quote-container::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 13px;
+    background: conic-gradient(from var(--angle, 0deg),
+            transparent 0deg,
+            transparent 50deg,
+            #00f2fe 90deg,
+            #ffffff 115deg,
+            #7a4ffe 150deg,
+            transparent 200deg,
+            transparent 360deg);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    padding: 2px;
+    animation: border-spin 3s linear infinite;
+    z-index: 0;
+    filter: blur(0.5px) brightness(1.5);
+}
+
+/* Inner glass surface */
+.panel-quote-container::after {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    border-radius: 11px;
+    background: rgba(255, 255, 255, 0.04);
+    z-index: 0;
+}
+
+.quote-inner {
+    position: relative;
+    z-index: 1;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    transition: all 0.5s ease;
+}
+
+.quote-inner-expanded {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 48px;
+    border-radius: 22px;
+}
+
+.panel-quote-container:hover::before {
+    animation-duration: 1.5s;
+}
+
+/* Hover glow */
+.panel-quote-container:hover::after {
+    background: rgba(0, 242, 254, 0.06);
+}
+
+/* Full-panel overlay (AnimatePresence sibling) */
+.quote-panel-overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    background: #0a0a1c;
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+/* Overlay border shimmer */
+.quote-panel-overlay::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 25px;
+    background: conic-gradient(from var(--angle, 0deg),
+            transparent 0deg,
+            transparent 50deg,
+            #00f2fe 90deg,
+            #ffffff 115deg,
+            #7a4ffe 150deg,
+            transparent 200deg,
+            transparent 360deg);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    padding: 2px;
+    animation: border-spin 2s linear infinite;
+    z-index: -1;
+    filter: blur(0.5px) brightness(1.8);
+}
+
+.quote-collapse-hint {
+    font-size: 0.7rem;
+    color: #00f2fe;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    opacity: 0.8;
+    margin-top: 24px;
+    animation: pulse-hint 2s ease-in-out infinite;
+}
+
+@keyframes pulse-hint {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes border-spin {
+    from {
+        --angle: 0deg;
+    }
+
+    to {
+        --angle: 360deg;
+    }
+}
+
 
 .panel:hover {
     transform: translateY(-5px);
@@ -302,7 +462,7 @@
 
 .carousel-dots {
     position: absolute;
-    bottom: 10px;
+    bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;

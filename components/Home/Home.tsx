@@ -20,22 +20,22 @@ const Home = () => {
   }, []);
   return (
     <div className="overflow-hidden">
-      <div id="home">
+      <div id="home" className="-scroll-mt-[30vh]">
         <Hero />
       </div>
-      <div id="approach">
+      <div id="approach" className="-scroll-mt-[30vh]">
         <Approach />
       </div>
-      <div id="experience">
+      <div id="foundation" className="-scroll-mt-[30vh]">
         <Experience />
       </div>
-      <div id="projects">
+      <div id="projects" className="-scroll-mt-[30vh]">
         <Projects />
       </div>
-      <div id="skills">
+      <div id="skills" className="-scroll-mt-[30vh]">
         <Skills />
       </div>
-      <div id="contact">
+      <div id="contact" className="-scroll-mt-[30vh]">
         <Contact />
       </div>
     </div>

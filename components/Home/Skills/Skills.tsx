@@ -133,16 +133,22 @@ const Skills = () => {
         'zapier.png'
     ]
 
-    // Split icons into 3 rows (approximately equal distribution)
-    const iconsPerRow = Math.ceil(allIcons.length / 3)
-    const row1 = allIcons.slice(0, iconsPerRow)
-    const row2 = allIcons.slice(iconsPerRow, iconsPerRow * 2)
-    const row3 = allIcons.slice(iconsPerRow * 2)
+    // Always use 3 rows for all devices, but on smartphones do not multiply icons
+    const [isMobile, setIsMobile] = useState(false);
 
-    // Duplicate arrays for seamless infinite scroll
-    const row1Icons = [...row1, ...row1, ...row1]
-    const row2Icons = [...row2, ...row2, ...row2]
-    const row3Icons = [...row3, ...row3, ...row3]
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth <= 480);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    const rowCount = 3;
+    const iconsPerRow = Math.ceil(allIcons.length / rowCount);
+    const rows = Array.from({ length: rowCount }, (_, i) =>
+        allIcons.slice(i * iconsPerRow, (i + 1) * iconsPerRow)
+    );
+    const rowsIcons = isMobile ? rows : rows.map(row => [...row, ...row, ...row]);
 
     return (
         <section className="skills-section">
@@ -154,58 +160,50 @@ const Skills = () => {
                     <HackerText text="Amid the chaos of technology, I found stability" delay={500} />
                 </p>
 
-                <div className="skills-carousel">
-                    {/* Row 1 */}
-                    <div className="skills-row">
-                        <div className="skills-track">
-                            {row1Icons.map((icon, index) => (
-                                <div key={`row1-${index}`} className="skill-icon-wrapper">
-                                    <Image
-                                        src={`/images/devicons/${icon}`}
-                                        alt={`Skill icon ${icon}`}
-                                        width={60}
-                                        height={60}
-                                        className="skill-icon"
-                                    />
+                {/* On mobile, wrap all rows in a single horizontally scrollable container */}
+                {isMobile ? (
+                    <div className="skills-carousel-mobile">
+                        <div className="skills-rows-wrapper">
+                            {rowsIcons.map((rowIcons, rowIdx) => (
+                                <div className="skills-row" key={`row-${rowIdx}`}>
+                                    <div className="skills-track">
+                                        {rowIcons.map((icon, index) => (
+                                            <div key={`row${rowIdx}-${index}`} className="skill-icon-wrapper">
+                                                <Image
+                                                    src={`/images/devicons/${icon}`}
+                                                    alt={`Skill icon ${icon}`}
+                                                    width={60}
+                                                    height={60}
+                                                    className="skill-icon"
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             ))}
                         </div>
                     </div>
-
-                    {/* Row 2 - Reverse direction for visual variety */}
-                    <div className="skills-row">
-                        <div className="skills-track skills-track-reverse">
-                            {row2Icons.map((icon, index) => (
-                                <div key={`row2-${index}`} className="skill-icon-wrapper">
-                                    <Image
-                                        src={`/images/devicons/${icon}`}
-                                        alt={`Skill icon ${icon}`}
-                                        width={60}
-                                        height={60}
-                                        className="skill-icon"
-                                    />
+                ) : (
+                    <div className="skills-carousel">
+                        {rowsIcons.map((rowIcons, rowIdx) => (
+                            <div className="skills-row" key={`row-${rowIdx}`}>
+                                <div className={`skills-track${rowIdx % 2 === 1 ? ' skills-track-reverse' : ''}`}>
+                                    {rowIcons.map((icon, index) => (
+                                        <div key={`row${rowIdx}-${index}`} className="skill-icon-wrapper">
+                                            <Image
+                                                src={`/images/devicons/${icon}`}
+                                                alt={`Skill icon ${icon}`}
+                                                width={60}
+                                                height={60}
+                                                className="skill-icon"
+                                            />
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
+                            </div>
+                        ))}
                     </div>
-
-                    {/* Row 3 */}
-                    <div className="skills-row">
-                        <div className="skills-track">
-                            {row3Icons.map((icon, index) => (
-                                <div key={`row3-${index}`} className="skill-icon-wrapper">
-                                    <Image
-                                        src={`/images/devicons/${icon}`}
-                                        alt={`Skill icon ${icon}`}
-                                        width={60}
-                                        height={60}
-                                        className="skill-icon"
-                                    />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
+                )}
             </div>
         </section>
     )

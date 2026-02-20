@@ -29,13 +29,19 @@ const GooglyEyes = () => {
     );
 };
 
+
 const Experience = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [direction, setDirection] = useState(0);
     const [isInteracting, setIsInteracting] = useState(false);
     const [isFinishing, setIsFinishing] = useState(false);
+    const [showGoogly, setShowGoogly] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
+    const [isQuoteExpanded, setIsQuoteExpanded] = useState(false);
+    const sectionRef = useRef<HTMLDivElement | null>(null);
     const autoRotateRef = useRef<NodeJS.Timeout | null>(null);
     const finishTimerRef = useRef<NodeJS.Timeout | null>(null);
+    const googlyTimerRef = useRef<NodeJS.Timeout | null>(null);
 
     const education = [
         {
@@ -63,34 +69,32 @@ const Experience = () => {
 
     const softSkills = [
         {
-            title: "Strategic Problem Solving",
-            description: "Analyzing complex challenges and implementing efficient, scalable solutions that align with long-term goals. I turn obstacles into opportunities for innovation.",
+            title: "Problem Solving",
+            description: "Analyzing complex challenges and implementing efficient, scalable solutions that align with long-term goals. Turning obstacles into opportunities for innovation",
             icon: "🧠"
         },
         {
-            title: "Collaborative Leadership",
-            description: "Fostering high-performance environments through clear communication and mutual support. I believe the best results come from empowered, cohesive teams.",
+            title: "Collaborative Mindset",
+            description: "WContinuously working well across teams, contributing constructively in code reviews, and mutual support. I believe the best results come from empowered, cohesive teams",
             icon: "🤝"
         },
         {
-            title: "Adaptive Learning",
-            description: "Rapidly mastering new technologies and methodologies to stay ahead in an ever-evolving landscape. Continuous growth is part of my DNA.",
+            title: "Adaptability",
+            description: "Rapidly adapting to changing requirements, new markets, evolving tech stacks, and shifting priorities to stay ahead in an ever-evolving landscape",
             icon: "🚀"
         },
         {
-            title: "Resilient Ownership",
-            description: "Taking full responsibility for project outcomes with a solution-oriented mindset. I stay focused and productive even under high pressure.",
-            icon: "⚓"
-        },
-        {
-            title: "Human-Centric Design",
-            description: "Creating experiences that prioritize user needs and emotional resonance. I build technology for humans, ensuring every interaction feels natural and valuable.",
-            icon: "✨"
+            title: "Clear Communication",
+            description: "Explaining complex systems and ideas in a way that both technical and non-technical audiences understand",
+            icon: "💡"
         }
     ];
 
     const handleManualInteraction = () => {
         setIsInteracting(true);
+        setShowGoogly(true);
+        if (googlyTimerRef.current) clearTimeout(googlyTimerRef.current);
+        googlyTimerRef.current = setTimeout(() => setShowGoogly(false), 3000);
         if (autoRotateRef.current) clearTimeout(autoRotateRef.current);
         if (finishTimerRef.current) clearTimeout(finishTimerRef.current);
         setIsFinishing(false);
@@ -108,7 +112,10 @@ const Experience = () => {
         setCurrentIndex((prev) => (prev - 1 + softSkills.length) % softSkills.length);
     };
 
+
+    // Only start the carousel when the section is visible
     useEffect(() => {
+        if (!isVisible) return;
         setIsFinishing(false);
         const interval = isInteracting ? 8000 : 4000;
 
@@ -125,7 +132,25 @@ const Experience = () => {
             if (autoRotateRef.current) clearTimeout(autoRotateRef.current);
             if (finishTimerRef.current) clearTimeout(finishTimerRef.current);
         };
-    }, [currentIndex, isInteracting]);
+    }, [currentIndex, isInteracting, isVisible]);
+
+    // Intersection Observer to detect when section is visible
+    useEffect(() => {
+        const section = sectionRef.current;
+        if (!section) return;
+        const observer = new window.IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                }
+            },
+            { threshold: 0.2 }
+        );
+        observer.observe(section);
+        return () => {
+            observer.disconnect();
+        };
+    }, []);
 
     const variants = {
         enter: (direction: number) => ({
@@ -148,7 +173,7 @@ const Experience = () => {
     };
 
     return (
-        <section id="experience" className="experience-section">
+        <section id="foundation" className="experience-section -scroll-mt-[30vh]" ref={sectionRef}>
             <div className="experience-container">
                 <h2 className="experience-title" data-aos="fade-up">Experience & Foundation</h2>
 
@@ -161,7 +186,7 @@ const Experience = () => {
 
                         <div className="soft-skills-carousel">
                             <AnimatePresence>
-                                {isInteracting && <GooglyEyes />}
+                                {showGoogly && <GooglyEyes />}
                             </AnimatePresence>
 
                             <motion.button
@@ -201,7 +226,7 @@ const Experience = () => {
                                 whileTap={{ scale: 0.9 }}
                                 whileHover={{ scale: 1.1 }}
                                 className={`carousel-nav next ${isFinishing ? 'water-active' : ''}`}
-                                onClick={() => nextSkill(true)}
+                                onClick={() => nextSkill()}
                             >
                                 <FaChevronRight />
                             </motion.button>
@@ -213,8 +238,7 @@ const Experience = () => {
                                         whileTap={{ scale: 1.5 }}
                                         className={`carousel-dot ${index === currentIndex ? 'active' : ''}`}
                                         onClick={() => {
-                                            setIsInteracting(true);
-                                            if (autoRotateRef.current) clearTimeout(autoRotateRef.current);
+                                            handleManualInteraction();
                                             setDirection(index > currentIndex ? 1 : -1);
                                             setCurrentIndex(index);
                                         }}
@@ -223,11 +247,62 @@ const Experience = () => {
                             </div>
                         </div>
 
-                        <div className="panel-quote-container mt-8 p-4 bg-white/5 rounded-xl border border-white/10">
-                            <p className="text-gray-400 italic text-xs leading-relaxed text-center">
-                                &quot;Technical excellence is amplified by strong interpersonal skills.&quot;
-                            </p>
-                        </div>
+                        <motion.div
+                            layoutId="quote-box"
+                            className="panel-quote-container mt-8 cursor-pointer"
+                            onClick={() => !isQuoteExpanded && setIsQuoteExpanded(true)}
+                            style={{
+                                visibility: isQuoteExpanded ? 'hidden' : 'visible',
+                                pointerEvents: isQuoteExpanded ? 'none' : 'auto',
+                            }}
+                        >
+                            <div className="quote-inner">
+                                <p
+                                    className="text-white italic text-2xl leading-relaxed text-center font-semibold"
+                                >
+                                    Why is it important?
+                                </p>
+                            </div>
+                        </motion.div>
+
+                        {/* Full-panel expanded overlay */}
+                        <AnimatePresence>
+                            {isQuoteExpanded && (
+                                <motion.div
+                                    layoutId="quote-box"
+                                    key="quote-overlay"
+                                    className="quote-panel-overlay"
+                                    onClick={() => setIsQuoteExpanded(false)}
+                                    transition={{ type: 'spring', stiffness: 220, damping: 28 }}
+                                >
+                                    <div className="quote-inner-expanded">
+                                        <p
+                                            className="text-white italic text-2xl leading-relaxed text-center font-semibold mb-6"
+                                        >
+                                            Why is it important?
+                                        </p>
+                                        <motion.p
+                                            className="text-gray-300 italic text-lg leading-relaxed text-center max-w-sm px-4"
+                                            initial={{ opacity: 0, y: 12 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: 12 }}
+                                            transition={{ delay: 0.2, duration: 0.35 }}
+                                        >
+                                            &quot;I believe that technical excellence is amplified by strong interpersonal skills. I strive to bridge the gap between complex engineering and human-centered solutions.&quot;
+                                        </motion.p>
+                                        <motion.p
+                                            className="quote-collapse-hint"
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            exit={{ opacity: 0 }}
+                                            transition={{ delay: 0.35 }}
+                                        >
+                                            Click to collapse
+                                        </motion.p>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </div>
 
                     {/* Right Panel: Education & Certificates */}

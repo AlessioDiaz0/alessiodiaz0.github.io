@@ -8,15 +8,13 @@ const ParticlesComponent = (props: { id?: string }) => {
   useEffect(() => {
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
-    }).then(() => {
-      setInit(true);
-    });
+    }).then(() => setInit(true));
   }, []);
 
   const options = useMemo(
     () => ({
       background: {
-        color: { value: "transparent" }, // Transparent for overlay use
+        color: { value: "transparent" },
       },
       fullScreen: {
         enable: false,
@@ -24,29 +22,16 @@ const ParticlesComponent = (props: { id?: string }) => {
       fpsLimit: 120,
       interactivity: {
         events: {
-          onClick: {
-            enable: true,
-            mode: "repulse" as const,
-          },
-          onHover: {
-            enable: true,
-            mode: 'grab' as const,
-          },
+          onClick: { enable: true, mode: "repulse" as const },
+          onHover: { enable: true, mode: "grab" as const },
         },
         modes: {
-          push: {
-            distance: 200,
-            duration: 15,
-          },
-          grab: {
-            distance: 150,
-          },
+          push: { distance: 200, duration: 15 },
+          grab: { distance: 150 },
         },
       },
       particles: {
-        color: {
-          value: "#FFFFFF",
-        },
+        color: { value: "#FFFFFF" },
         links: {
           color: "#FFFFFF",
           distance: 150,
@@ -57,39 +42,40 @@ const ParticlesComponent = (props: { id?: string }) => {
         move: {
           direction: "none" as const,
           enable: true,
-          outModes: {
-            default: "bounce" as const,
-          },
+          outModes: { default: "bounce" as const },
           random: true,
           speed: 1,
           straight: false,
         },
         number: {
-          density: {
-            enable: true,
-          },
-          value: 180,
+          density: { enable: true },
+          value: 180, // desktop/default
         },
-        opacity: {
-          value: 1.0,
-        },
-        shape: {
-          type: "circle",
-        },
-        size: {
-          value: { min: 1, max: 3 },
-        },
+        opacity: { value: 1.0 },
+        shape: { type: "circle" },
+        size: { value: { min: 1, max: 3 } },
       },
       detectRetina: true,
+
+      responsive: [
+        {
+          maxWidth: 640,
+          options: {
+            particles: {
+              number: {
+                value: 280,
+              },
+            },
+          },
+        },
+      ],
     }),
-    [],
+    []
   );
 
-  if (init) {
-    return <Particles id={props.id} options={options} className="absolute inset-0 " />;
-  }
+  if (!init) return null;
 
-  return null;
+  return <Particles id={props.id} options={options} className="absolute inset-0" />;
 };
 
 export default ParticlesComponent;

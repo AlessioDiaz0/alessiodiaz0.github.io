@@ -96,7 +96,19 @@ const ContactBackground = (props: { id?: string }) => {
             },
             fullScreen: {
                 enable: false,
-            }
+            },
+            responsive: [
+                {
+                    maxWidth: 768, // mobile/tablet breakpoint (change if you want)
+                    options: {
+                        interactivity: {
+                            events: {
+                                onHover: { enable: false }, // no hover light on mobile
+                            },
+                        },
+                    },
+                },
+            ],
         }),
         []
     );

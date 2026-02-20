@@ -99,30 +99,24 @@ const Contact = () => {
                             alt="LinkedIn"
                             width={140}
                             height={35}
-                            className="mt-8 cursor-pointer hover:scale-105 transition-all duration-300"
+                            className="hidden md:block mt-8 cursor-pointer hover:scale-105 transition-all duration-300"
                         />
                     </Link>
                 </div>
                 {/* form */}
-                <div className="md:p-10 p-5 bg-[#131332] rounded-lg" data-aos="fade-left" data-aos-offset="300">
-                    <input
-                        type="text"
-                        placeholder="Full Name"
-                        className="px-4 py-3.5 bg-[#363659] text-white placeholder:text-white/70 outline-none rounded-md w-full"
-                    />
-                    <input
-                        type="email"
-                        placeholder="Email Address"
-                        className="px-4 py-3.5 mt-4 bg-[#363659] text-white placeholder:text-white/70 outline-none rounded-md w-full"
-                    />
-                    <textarea
-                        placeholder="Your Message"
-                        className="px-4 py-3.5 mt-4 bg-[#363659] placeholder:text-white/70 h-[14rem] resize-none text-white outline-none rounded-md w-full"
-                    />
-                    <button className="mt-6 px-12 py-4 bg-blue-950 hover:bg-blue-900 transition-all duration-300 cursor-pointer text-white rounded-full">
-                        Send Message
-                    </button>
-
+                <div
+                    className="hidden md:flex items-center justify-center"
+                    data-aos="fade-left"
+                    data-aos-offset="300">
+                    <div className="float-astronaut relative -top-15">
+                        <Image
+                            src="/images/github-copilot-icon.webp"
+                            alt="astronaut icon jumping"
+                            width={350}
+                            height={350}
+                            className="object-contain"
+                            priority />
+                    </div>
                 </div>
             </div>
         </div>

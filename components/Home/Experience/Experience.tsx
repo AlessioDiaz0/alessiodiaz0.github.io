@@ -30,7 +30,10 @@ const GooglyEyes = () => {
 };
 
 
+import { useTranslations } from 'next-intl';
+
 const Experience = () => {
+    const t = useTranslations('Experience');
     const [currentIndex, setCurrentIndex] = useState(0);
     const [direction, setDirection] = useState(0);
     const [isInteracting, setIsInteracting] = useState(false);
@@ -46,8 +49,8 @@ const Experience = () => {
     const education = [
         {
             date: "2024",
-            title: "B.S. in Computer Science",
-            spec: "With a Specialization in Artificial Intelligence",
+            title: t('Education.degree'),
+            spec: t('Education.spec'),
             org: "University of California, Irvine"
         },
     ];
@@ -69,23 +72,23 @@ const Experience = () => {
 
     const softSkills = [
         {
-            title: "Problem Solving",
-            description: "Analyzing complex challenges and implementing efficient, scalable solutions that align with long-term goals. Turning obstacles into opportunities for innovation",
+            title: t('SoftSkills.problemSolving.title'),
+            description: t('SoftSkills.problemSolving.description'),
             icon: "🧠"
         },
         {
-            title: "Collaborative Mindset",
-            description: "WContinuously working well across teams, contributing constructively in code reviews, and mutual support. I believe the best results come from empowered, cohesive teams",
+            title: t('SoftSkills.collaborativeMindset.title'),
+            description: t('SoftSkills.collaborativeMindset.description'),
             icon: "🤝"
         },
         {
-            title: "Adaptability",
-            description: "Rapidly adapting to changing requirements, new markets, evolving tech stacks, and shifting priorities to stay ahead in an ever-evolving landscape",
+            title: t('SoftSkills.adaptability.title'),
+            description: t('SoftSkills.adaptability.description'),
             icon: "🚀"
         },
         {
-            title: "Clear Communication",
-            description: "Explaining complex systems and ideas in a way that both technical and non-technical audiences understand",
+            title: t('SoftSkills.clearCommunication.title'),
+            description: t('SoftSkills.clearCommunication.description'),
             icon: "💡"
         }
     ];
@@ -113,9 +116,9 @@ const Experience = () => {
     };
 
 
-    // Only start the carousel when the section is visible
+    // Only start the carousel when the section is visible and quote is collapsed
     useEffect(() => {
-        if (!isVisible) return;
+        if (!isVisible || isQuoteExpanded) return;
         setIsFinishing(false);
         const interval = isInteracting ? 8000 : 4000;
 
@@ -132,7 +135,7 @@ const Experience = () => {
             if (autoRotateRef.current) clearTimeout(autoRotateRef.current);
             if (finishTimerRef.current) clearTimeout(finishTimerRef.current);
         };
-    }, [currentIndex, isInteracting, isVisible]);
+    }, [currentIndex, isInteracting, isVisible, isQuoteExpanded]);
 
     // Intersection Observer to detect when section is visible
     useEffect(() => {
@@ -175,13 +178,13 @@ const Experience = () => {
     return (
         <section id="foundation" className="experience-section -scroll-mt-[30vh]" ref={sectionRef}>
             <div className="experience-container">
-                <h2 className="experience-title" data-aos="fade-up">Experience & Foundation</h2>
+                <h2 className="experience-title" data-aos="fade-up">{t('title')}</h2>
 
                 <div className="panels-wrapper">
                     {/* Left Panel: Soft Skills */}
                     <div className="panel left-panel" data-aos="fade-right">
                         <h3 className="panel-title">
-                            <FaLightbulb /> Key Soft Skills
+                            <FaLightbulb /> {t('SoftSkills.title')}
                         </h3>
 
                         <div className="soft-skills-carousel">
@@ -190,8 +193,8 @@ const Experience = () => {
                             </AnimatePresence>
 
                             <motion.button
-                                whileTap={{ scale: 0.9 }}
-                                whileHover={{ scale: 1.1 }}
+                                style={{ y: '-50%' }}
+                                whileTap={{ scale: 0.9, y: '-50%' }}
                                 className="carousel-nav prev"
                                 onClick={() => prevSkill(true)}
                             >
@@ -223,8 +226,8 @@ const Experience = () => {
                             </div>
 
                             <motion.button
-                                whileTap={{ scale: 0.9 }}
-                                whileHover={{ scale: 1.1 }}
+                                style={{ y: '-50%' }}
+                                whileTap={{ scale: 0.9, y: '-50%' }}
                                 className={`carousel-nav next ${isFinishing ? 'water-active' : ''}`}
                                 onClick={() => nextSkill()}
                             >
@@ -247,8 +250,7 @@ const Experience = () => {
                             </div>
                         </div>
 
-                        <motion.div
-                            layoutId="quote-box"
+                        <div
                             className="panel-quote-container mt-8 cursor-pointer"
                             onClick={() => !isQuoteExpanded && setIsQuoteExpanded(true)}
                             style={{
@@ -260,60 +262,48 @@ const Experience = () => {
                                 <p
                                     className="text-white italic text-2xl leading-relaxed text-center font-semibold"
                                 >
-                                    Why is it important?
+                                    {t('Quotes.whyImportant')}
                                 </p>
                             </div>
-                        </motion.div>
+                        </div>
 
                         {/* Full-panel expanded overlay */}
-                        <AnimatePresence>
-                            {isQuoteExpanded && (
-                                <motion.div
-                                    layoutId="quote-box"
-                                    key="quote-overlay"
-                                    className="quote-panel-overlay"
-                                    onClick={() => setIsQuoteExpanded(false)}
-                                    transition={{ type: 'spring', stiffness: 220, damping: 28 }}
+                        <div
+                            className={`quote-panel-overlay ${isQuoteExpanded ? 'quote-panel-overlay--open' : ''}`}
+                            onClick={() => setIsQuoteExpanded(false)}
+                            aria-hidden={!isQuoteExpanded}
+                        >
+                            <div className="quote-inner-expanded">
+                                <p
+                                    className="text-white italic text-2xl leading-relaxed text-center font-semibold mb-6"
                                 >
-                                    <div className="quote-inner-expanded">
-                                        <p
-                                            className="text-white italic text-2xl leading-relaxed text-center font-semibold mb-6"
-                                        >
-                                            Why is it important?
-                                        </p>
-                                        <motion.p
-                                            className="text-gray-300 italic text-lg leading-relaxed text-center max-w-sm px-4"
-                                            initial={{ opacity: 0, y: 12 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0, y: 12 }}
-                                            transition={{ delay: 0.2, duration: 0.35 }}
-                                        >
-                                            &quot;I believe that technical excellence is amplified by strong interpersonal skills. I strive to bridge the gap between complex engineering and human-centered solutions.&quot;
-                                        </motion.p>
-                                        <motion.p
-                                            className="quote-collapse-hint"
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            exit={{ opacity: 0 }}
-                                            transition={{ delay: 0.35 }}
-                                        >
-                                            Click to collapse
-                                        </motion.p>
-                                    </div>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
+                                    {t('Quotes.whyImportant')}
+                                </p>
+                                <p
+                                    className={`text-gray-300 italic text-lg leading-relaxed text-center max-w-sm px-4 quote-body-text ${isQuoteExpanded ? 'quote-body-text--visible' : ''}`}
+                                >
+                                    &quot;{t('Quotes.expandedQuote')}&quot;
+                                </p>
+                                <p
+                                    className={`quote-collapse-hint ${isQuoteExpanded ? "quote-collapse-hint--visible" : ""
+                                        }`}
+                                >
+                                    <span className="md:hidden">{t('Quotes.tapToCollapse')}</span>
+                                    <span className="hidden md:inline">{t('Quotes.clickToCollapse')}</span>
+                                </p>
+                            </div>
+                        </div>
                     </div>
 
                     {/* Right Panel: Education & Certificates */}
                     <div className="panel right-panel" data-aos="fade-left">
                         <h3 className="panel-title">
-                            <FaGraduationCap /> Education & Certificates
+                            <FaGraduationCap /> {t('Education.title')}
                         </h3>
 
                         <div className="timeline">
                             <h4 className="flex items-center gap-2 text-[#00f2fe] font-bold mb-2" data-aos="fade-down">
-                                <FaGraduationCap className="text-sm" /> Academics
+                                <FaGraduationCap className="text-sm" /> {t('Education.academics')}
                             </h4>
                             {education.map((item, index) => (
                                 <div key={`edu-${index}`} className="timeline-item" data-aos="fade-down" data-aos-delay={index * 50}>
@@ -325,7 +315,7 @@ const Experience = () => {
                             ))}
 
                             <h4 className="flex items-center gap-2 text-[#00f2fe] font-bold mt-6 mb-2" data-aos="fade-down">
-                                <FaCertificate className="text-sm" /> Recent Certifications
+                                <FaCertificate className="text-sm" /> {t('Education.certifications')}
                             </h4>
                             {certificates.map((item, index) => (
                                 <div key={`cert-${index}`} className="timeline-item" data-aos="fade-down" data-aos-delay={index * 50}>

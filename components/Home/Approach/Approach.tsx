@@ -1,38 +1,38 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import ApproachCard from "./ApproachCard";
+import { useTranslations } from "next-intl";
 
 const EXPAND_MS = 200;     // was 260
 const LAYOUT_DUR = 0.15;   // fast expand/shrink duration
 
-const cards = [
-    {
-        icon: "/images/s1.png",
-        name: "Simple",
-        description:
-            "Focusing on clean code and intuitive interfaces. Stripping away complexity to deliver a seamless user experience.",
-    },
-    {
-        icon: "/images/s2.png",
-        name: "Efficient",
-        description:
-            "Optimizing performance and workflows for fast delivery. Smart solutions that save time and computational resources.",
-    },
-    {
-        icon: "/images/s3.png",
-        name: "Reliable",
-        description:
-            "Building robust systems with consistent performance. Rigorous testing and best practices ensure your product works as intended.",
-    },
-    {
-        icon: "/images/s4.png",
-        name: "Scalable",
-        description:
-            "Planning for the future with modular architectures. Grow your application effortlessly as your user base expands.",
-    },
-];
+
 
 const Approach = () => {
+    const t = useTranslations('Approach');
+    const cards = [
+        {
+            icon: "/images/s1.png",
+            name: t('cards.simple.name'),
+            description: t('cards.simple.description'),
+        },
+        {
+            icon: "/images/s2.png",
+            name: t('cards.efficient.name'),
+            description: t('cards.efficient.description'),
+        },
+        {
+            icon: "/images/s3.png",
+            name: t('cards.reliable.name'),
+            description: t('cards.reliable.description'),
+        },
+        {
+            icon: "/images/s4.png",
+            name: t('cards.scalable.name'),
+            description: t('cards.scalable.description'),
+        },
+    ];
+
     // Mobile sequencing
     const [activeIndex, setActiveIndex] = useState<number | null>(null); // expanded overlay exists
     const [flippedIndex, setFlippedIndex] = useState<number | null>(null); // back side shown
@@ -72,11 +72,11 @@ const Approach = () => {
     return (
         <div className="pt-16 pb-16 text-white">
             <h1 className="text-center text-2xl md:text-4xl xl:text-5xl font-bold">
-                My Approach <br />
+                {t('title')} <br />
             </h1>
 
             {/* Same sizing idea: phone area equals one big card */}
-            <div className="w-[90%] sm:w-[70%] mx-auto mt-20 relative h-[300px] md:h-auto">
+            <div className="w-[90%] sm:w-[70%] mx-auto mt-20 relative h-[350px] md:h-auto">
                 {/* MOBILE 2x2 GRID */}
                 <div className="md:hidden h-full relative">
                     <div className="grid grid-cols-2 grid-rows-2 gap-3 h-full">
@@ -131,7 +131,7 @@ const Approach = () => {
                 <div className="hidden md:grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-10 items-center">
                     {cards.map((c) => (
                         <div key={c.name} data-aos="fade-down" data-aos-duration="600">
-                            <div className="h-[300px] w-full">
+                            <div className="h-[350px] w-full">
                                 <ApproachCard icon={c.icon} name={c.name} description={c.description} />
                             </div>
                         </div>

@@ -1,9 +1,11 @@
 "use client";
 
 import { NavLinks } from "@/constant/constant";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import React, { useEffect } from "react";
 import { CgClose } from "react-icons/cg";
+import { useTranslations } from "next-intl";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 type Props = {
   showNav: boolean;
@@ -19,6 +21,7 @@ const NavMobileItem = ({
   link: NavLinkItem;
   closeNav: () => void;
 }) => {
+  const t = useTranslations('Nav');
   return (
     <li>
       <Link
@@ -26,9 +29,7 @@ const NavMobileItem = ({
         onClick={closeNav}
         className="group flex items-center justify-between rounded-xl px-4 py-3 text-white/90 hover:bg-white/10 active:bg-white/15 transition"
       >
-        {/* Replace this with your exact content (label, icon, arrow, etc.) */}
-        <span className="text-base">{link.label ?? "Link"}</span>
-        {/* Example right-side indicator (optional) */}
+        <span className="text-base">{t(link.label)}</span>
         <span className="text-white/40 group-hover:text-white/60 transition">→</span>
       </Link>
     </li>
@@ -36,6 +37,7 @@ const NavMobileItem = ({
 };
 
 const NavMobile = ({ showNav, closeNav }: Props) => {
+  const t = useTranslations('Nav');
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") closeNav();
@@ -74,7 +76,7 @@ const NavMobile = ({ showNav, closeNav }: Props) => {
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 pt-5 pb-3">
-          <p className="text-white/80 text-sm tracking-wide">Navigation</p>
+          <p className="text-white/80 text-sm tracking-wide">{t('Home')}</p>
           <button
             aria-label="Close navigation"
             onClick={closeNav}
@@ -86,11 +88,16 @@ const NavMobile = ({ showNav, closeNav }: Props) => {
 
         {/* Links */}
         <nav className="px-3 py-3">
-          <ul className="flex flex-col gap-1">
+          <ul className="flex flex-col gap-1 mb-6">
             {NavLinks.map((link) => (
               <NavMobileItem key={link.id} link={link} closeNav={closeNav} />
             ))}
           </ul>
+
+          <div className="px-4 py-4 border-t border-white/10">
+            <p className="text-white/40 text-xs uppercase tracking-widest mb-4">Language / Lingua</p>
+            <LanguageSwitcher />
+          </div>
         </nav>
       </aside>
     </div>

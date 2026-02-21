@@ -1,16 +1,19 @@
 "use client";
 import { NavLinks } from '@/constant/constant'
 import Image from 'next/image';
-import Link from 'next/link'
+import { Link } from '@/i18n/routing';
 import React, { useEffect, useState } from 'react'
 import { FaCode } from 'react-icons/fa'
 import { HiBars3BottomRight } from 'react-icons/hi2'
+import { useTranslations } from 'next-intl';
+import LanguageSwitcher from './LanguageSwitcher';
 
 type Props = {
     openNav: () => void;
 }
 
 const Nav = ({ openNav }: Props) => {
+    const t = useTranslations('Nav');
     const [showNavBg, setShowNavBg] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
     const [scrollReference, setScrollReference] = useState(0);
@@ -55,19 +58,26 @@ const Nav = ({ openNav }: Props) => {
                 <div className="hidden lg:flex items-center space-x-10">
                     {NavLinks.map((link) => {
                         return <Link key={link.id} href={link.url} className="text-base hover:text-cyan-300 text-white font-medium transition-all duration-200">
-                            <p>{link.label}</p>
+                            <p>{t(link.label)}</p>
                         </Link>
                     })}
                 </div>
-                <Link href="https://www.linkedin.com/in/alessio-diaz/" className="flex items-center">
-                    <Image
-                        src="/images/linkedin-short.svg"
-                        alt="Logo"
-                        width={40}
-                        height={40}
-                        className="cursor-pointer"
-                    />
-                </Link>
+
+                <div className="flex items-center space-x-6">
+                    <div className="hidden md:block">
+                        <LanguageSwitcher />
+                    </div>
+                    <Link href="https://www.linkedin.com/in/alessio-diaz/" className="flex items-center">
+                        <Image
+                            src="/images/linkedin-short.svg"
+                            alt="Logo"
+                            width={40}
+                            height={40}
+                            className="cursor-pointer"
+                        />
+                    </Link>
+                </div>
+
                 {/* Burger Menu */}
                 <HiBars3BottomRight onClick={openNav} className="w-8 h-8 cursor-pointer text-white lg:hidden" />
             </div>

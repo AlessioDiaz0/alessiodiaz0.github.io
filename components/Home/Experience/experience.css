@@ -78,7 +78,7 @@
     cursor: pointer;
 }
 
-/* The rotating conic-gradient border */
+/* The rotating conic-gradient border — paused while overlay is open */
 .panel-quote-container::before {
     content: '';
     position: absolute;
@@ -100,6 +100,11 @@
     animation: border-spin 3s linear infinite;
     z-index: 0;
     filter: blur(0.5px) brightness(1.5);
+}
+
+/* Pause spinning border while hidden (overlay covers it) */
+.panel-quote-container[style*="hidden"]::before {
+    animation-play-state: paused;
 }
 
 /* Inner glass surface */
@@ -147,14 +152,14 @@
     background: rgba(0, 242, 254, 0.06);
 }
 
-/* Full-panel overlay (AnimatePresence sibling) */
+/* Full-panel overlay — always in the DOM, toggled via CSS class */
 .quote-panel-overlay {
     position: absolute;
     inset: 0;
     border-radius: 24px;
+    /* Solid dark bg — no backdrop-filter (too GPU‑heavy on mobile/Safari) */
     background: #0a0a1c;
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(0, 242, 254, 0.35);
     z-index: 50;
     display: flex;
     flex-direction: column;
@@ -162,41 +167,51 @@
     justify-content: center;
     cursor: pointer;
     overflow: hidden;
+    /* Collapsed: shrunk to nothing at the bottom (where the button sits) */
+    opacity: 0;
+    pointer-events: none;
+    transform: scaleY(0) scaleX(0.85);
+    transform-origin: bottom center;
+    transition:
+        opacity 0.28s ease,
+        transform 0.35s cubic-bezier(0.34, 1.3, 0.64, 1);
+    will-change: opacity, transform;
 }
 
-/* Overlay border shimmer */
-.quote-panel-overlay::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: 25px;
-    background: conic-gradient(from var(--angle, 0deg),
-            transparent 0deg,
-            transparent 50deg,
-            #00f2fe 90deg,
-            #ffffff 115deg,
-            #7a4ffe 150deg,
-            transparent 200deg,
-            transparent 360deg);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: destination-out;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    padding: 2px;
-    animation: border-spin 2s linear infinite;
-    z-index: -1;
-    filter: blur(0.5px) brightness(1.8);
+.quote-panel-overlay--open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scaleY(1) scaleX(1);
 }
 
+/* Body text — staggered fade in after overlay opens */
+.quote-body-text {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease 0.18s, transform 0.3s ease 0.18s;
+}
+
+.quote-body-text--visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Collapse hint */
 .quote-collapse-hint {
     font-size: 0.7rem;
     color: #00f2fe;
     text-transform: uppercase;
     letter-spacing: 0.2em;
     font-weight: 700;
-    opacity: 0.8;
     margin-top: 24px;
-    animation: pulse-hint 2s ease-in-out infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease 0.32s;
+    animation: none;
+}
+
+.quote-collapse-hint--visible {
+    opacity: 0.8;
+    animation: pulse-hint 2s ease-in-out infinite 0.32s;
 }
 
 @keyframes pulse-hint {
@@ -365,7 +380,7 @@
 .carousel-nav:hover {
     background: rgba(0, 242, 254, 0.2);
     border-color: rgba(0, 242, 254, 0.4);
-    transform: translateY(-50%) scale(1.1);
+    transform: translateY(-50%);
 }
 
 .carousel-nav.prev {
@@ -492,15 +507,20 @@
     }
 
     .carousel-nav.prev {
-        left: 0px;
+        left: -3px;
     }
 
     .carousel-nav.next {
-        right: 0px;
+        right: -3px;
+    }
+
+    .soft-skills-carousel {
+        height: 440px;
+        min-height: 440px;
     }
 
     .soft-skill-panel-card {
-        padding: 0 30px;
+        padding: 0 33px;
     }
 
     .skill-title-hero {
@@ -562,7 +582,7 @@
 
 @media (max-width: 480px) {
     .panel {
-        padding: 25px;
+        padding: 22px;
     }
 
     .panel-title {

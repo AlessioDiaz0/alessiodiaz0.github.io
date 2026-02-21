@@ -1,0 +1,97 @@
+{
+    "Nav": {
+        "Home": "Inicio",
+        "Approach": "Metodología",
+        "Foundation": "Fundamentos",
+        "Projects": "Proyectos",
+        "Skills": "Habilidades",
+        "Contact": "Contacto"
+    },
+    "Experience": {
+        "title": "Experiencia y Fundamentos",
+        "SoftSkills": {
+            "title": "Habilidades Blandas Principales",
+            "problemSolving": {
+                "title": "Resolución de Problemas",
+                "description": "Analizar desafíos complejos e implementar soluciones eficientes y escalables que se alineen con los objetivos a largo plazo. Transformar obstáculos en oportunidades de innovación."
+            },
+            "collaborativeMindset": {
+                "title": "Mentalidad Colaborativa",
+                "description": "Trabajar constantemente bien en equipo, contribuir de manera constructiva en las revisiones de código y apoyo mutuo. Creo que los mejores resultados provienen de equipos cohesionados y empoderados."
+            },
+            "adaptability": {
+                "title": "Adaptabilidad",
+                "description": "Adaptarse rápidamente a los cambios en los requisitos, nuevos mercados, pilas tecnológicas en evolución y prioridades cambiantes para mantenerse a la vanguardia en un panorama en constante evolución."
+            },
+            "clearCommunication": {
+                "title": "Comunicación Clara",
+                "description": "Explicar sistemas e ideas complejos de manera que tanto el público técnico como el no técnico comprendan, garantizando la alineación y la claridad."
+            }
+        },
+        "Quotes": {
+            "whyImportant": "¿Por qué es importante?",
+            "expandedQuote": "Creo que la excelencia técnica se amplifica con fuertes habilidades interpersonales. Me esfuerzo por cerrar la brecha entre la ingeniería compleja y las soluciones centradas en el ser humano.",
+            "tapToCollapse": "Toca para cerrar",
+            "clickToCollapse": "Haz clic para cerrar"
+        },
+        "Education": {
+            "title": "Formación y Certificados",
+            "academics": "Academia",
+            "certifications": "Certificaciones Recientes",
+            "degree": "B.S. in Computer Science",
+            "spec": "Con Especialización en Inteligencia Artificial"
+        }
+    },
+    "Hero": {
+        "title_1": "Creando productos, ",
+        "title_2": "herramientas,",
+        "title_3": "y experiencias.",
+        "greeting": "¡Hola! Soy Alessio, un apasionado",
+        "buildingGlobally": "Construyendo a nivel global — Fluente en",
+        "typewriter": {
+            "frontend": "Desarrollador Frontend",
+            "llm": "Desarrollador LLM",
+            "cv": "Investigador de Visión Artificial",
+            "agentic": "Desarrollador de IA Agéntica",
+            "backend": "Desarrollador Backend"
+        }
+    },
+    "Skills": {
+        "title": "Mis Habilidades Técnicas",
+        "subtitle": "En medio del caos de la tecnología, encontré la estabilidad"
+    },
+    "Approach": {
+        "title": "Mi Metodología",
+        "cards": {
+            "simple": {
+                "name": "Sencillo",
+                "description": "La sencillez reduce la carga cognitiva y evita errores innecesarios. Cuando los sistemas son claros e intuitivos, los equipos se mueven más rápido y los usuarios permanecen comprometidos."
+            },
+            "efficient": {
+                "name": "Eficiente",
+                "description": "La eficiencia impacta directamente en el costo, la velocidad y la escalabilidad. Los flujos de trabajo optimizados liberan recursos para que la energía se pueda dedicar a la innovación en lugar de solucionar cuellos de botella."
+            },
+            "reliable": {
+                "name": "Confiable",
+                "description": "La confiabilidad construye confianza a largo plazo. Un rendimiento constante protege su reputación y garantiza que los usuarios puedan depender de su producto cuando más importa."
+            },
+            "scalable": {
+                "name": "Escalable",
+                "description": "El crecimiento es inevitable. Las bases escalables permiten que los productos evolucionen y se expandan sin romperse ante una mayor demanda."
+            }
+        }
+    },
+    "Contact": {
+        "title": "¡Ponte en contacto!",
+        "subtitle": "Contáctame hoy y convierte tus ideas en soluciones impactantes.",
+        "copied": "¡Copiado!"
+    },
+    "Footer": {
+        "sourceCode": "Código Fuente",
+        "madeBy": "Hecho por - Alessio Diaz Cama",
+        "copyright": "Copyright 2026. Todos los derechos reservados."
+    },
+    "Projects": {
+        "title": "Proyectos Recientes"
+    }
+}

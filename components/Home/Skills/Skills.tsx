@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
 import './skills.css'
+import { useTranslations } from 'next-intl';
 
 const HackerText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
     const letters = "0123456789ABCDEFGITUVWXYZ!@#$%^&*";
@@ -88,6 +89,7 @@ const HackerText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
 };
 
 const Skills = () => {
+    const t = useTranslations('Skills');
     const allIcons = [
         'original-4.svg',
         'original-5.svg',
@@ -154,10 +156,10 @@ const Skills = () => {
         <section className="skills-section">
             <div className="skills-container">
                 <h2 className="skills-title" data-aos="fade-down">
-                    <HackerText text="My Technical Skills" delay={500} />
+                    <HackerText text={t('title')} delay={500} />
                 </h2>
                 <p className="skills-subtitle" data-aos="fade-down" data-aos-delay="200">
-                    <HackerText text="Amid the chaos of technology, I found stability" delay={500} />
+                    <HackerText text={t('subtitle')} delay={500} />
                 </p>
 
                 {/* On mobile, wrap all rows in a single horizontally scrollable container */}

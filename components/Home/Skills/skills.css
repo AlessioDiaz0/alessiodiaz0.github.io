@@ -5,24 +5,28 @@
         -webkit-overflow-scrolling: touch;
         width: 100%;
     }
+
     .skills-rows-wrapper {
         display: flex;
         flex-direction: column;
         min-width: max-content;
     }
+
     .skills-row {
         min-width: max-content;
         width: fit-content;
     }
+
     .skills-track {
         min-width: max-content;
         width: fit-content;
     }
 }
+
 .skills-section {
     width: 100%;
     padding: 80px 20px;
-    background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+    background: linear-gradient(to bottom, #0f0f1e 0%, #1a1a2e 100%);
     overflow: hidden;
 }
 

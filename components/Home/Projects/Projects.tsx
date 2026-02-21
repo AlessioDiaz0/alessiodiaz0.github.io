@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 const projects = [
     {
@@ -29,11 +30,16 @@ const projects = [
 ];
 
 const Projects = () => {
+    const t = useTranslations('Projects');
     return (
-        <section className="bg-black py-32 px-6 md:px-12 text-white -scroll-mt-[30vh]" id="projects">
+        <section
+            className="py-32 px-6 md:px-12 text-white -scroll-mt-[30vh]"
+            id="projects"
+            style={{ background: 'linear-gradient(to bottom, #0d0d1f 0%, #000 120px, #000 calc(100% - 120px), #0f0f1e 100%)' }}
+        >
             <div className="max-w-5xl mx-auto">
                 <h2 className="text-4xl md:text-5xl font-bold mb-24 py-4 px-2 leading-tight text-center bg-linear-to-br from-white to-[#a0a0b0] bg-clip-text text-transparent tracking-tight" data-aos="fade-up">
-                    Recent Projects
+                    {t('title')}
                 </h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-24">

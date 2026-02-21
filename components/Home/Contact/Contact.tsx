@@ -1,12 +1,13 @@
 "use client"
 import React, { useState } from 'react'
-import Link from 'next/link'
+import { Link } from '@/i18n/routing'
 import Image from 'next/image'
 import { BiEnvelope, BiLogoWhatsapp, BiMap, BiPhone } from 'react-icons/bi'
-
+import { useTranslations } from 'next-intl'
 import ContactBackground from './ContactBackground'
 
 const Contact = () => {
+    const t = useTranslations('Contact');
     const [copiedText, setCopiedText] = useState<string | null>(null);
 
     const handleCopy = (text: string) => {
@@ -22,10 +23,10 @@ const Contact = () => {
                 {/* Text content */}
                 <div data-aos="fade-right" data-aos-offset="300">
                     <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-200 pop-shine">
-                        Let's get in touch!
+                        {t('title')}
                     </h1>
                     <p className="text-gray-400 mt-6 text-base sm:text-lg">
-                        Reach out to me today and turn your ideas into impactful solutions.
+                        {t('subtitle')}
                     </p>
                     <div className="mt-7">
                         <div
@@ -40,7 +41,7 @@ const Contact = () => {
                                 </p>
                                 {copiedText === "+39 3513782733" && (
                                     <span className="text-emerald-400 text-sm font-medium animate-in fade-in slide-in-from-left-2 duration-300">
-                                        Copied!
+                                        {t('copied')}
                                     </span>
                                 )}
                             </div>
@@ -59,7 +60,7 @@ const Contact = () => {
                                 </p>
                                 {copiedText === "+1 (209) 914-3402" && (
                                     <span className="text-emerald-400 text-sm font-medium animate-in fade-in slide-in-from-left-2 duration-300">
-                                        Copied!
+                                        {t('copied')}
                                     </span>
                                 )}
                             </div>
@@ -78,7 +79,7 @@ const Contact = () => {
                                 </p>
                                 {copiedText === "alessio.diaz0@gmail.com" && (
                                     <span className="text-emerald-400 text-sm font-medium animate-in fade-in slide-in-from-left-2 duration-300">
-                                        Copied!
+                                        {t('copied')}
                                     </span>
                                 )}
                             </div>

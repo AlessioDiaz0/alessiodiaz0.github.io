@@ -1,0 +1,97 @@
+{
+    "Nav": {
+        "Home": "Home",
+        "Approach": "Approach",
+        "Foundation": "Foundation",
+        "Projects": "Projects",
+        "Skills": "Skills",
+        "Contact": "Contact"
+    },
+    "Experience": {
+        "title": "Experience & Foundation",
+        "SoftSkills": {
+            "title": "Key Soft Skills",
+            "problemSolving": {
+                "title": "Problem Solving",
+                "description": "Analyzing complex challenges and implementing efficient, scalable solutions that align with long-term goals. Turning obstacles into opportunities for innovation"
+            },
+            "collaborativeMindset": {
+                "title": "Collaborative Mindset",
+                "description": "Continuously working well across teams, contributing constructively in code reviews, and mutual support. I believe the best results come from empowered, cohesive teams"
+            },
+            "adaptability": {
+                "title": "Adaptability",
+                "description": "Rapidly adapting to changing requirements, new markets, evolving tech stacks, and shifting priorities to stay ahead in an ever-evolving landscape"
+            },
+            "clearCommunication": {
+                "title": "Clear Communication",
+                "description": "Explaining complex systems and ideas in a way that both technical and non-technical audiences understand, ensuring alignment and clarity"
+            }
+        },
+        "Quotes": {
+            "whyImportant": "Why is it important?",
+            "expandedQuote": "I believe that technical excellence is amplified by strong interpersonal skills. I strive to bridge the gap between complex engineering and human-centered solutions.",
+            "tapToCollapse": "Tap to collapse",
+            "clickToCollapse": "Click to collapse"
+        },
+        "Education": {
+            "title": "Education & Certificates",
+            "academics": "Academics",
+            "certifications": "Recent Certifications",
+            "degree": "B.S. in Computer Science",
+            "spec": "With a Specialization in Artificial Intelligence"
+        }
+    },
+    "Hero": {
+        "title_1": "Creating products, ",
+        "title_2": "tools,",
+        "title_3": "and experiences.",
+        "greeting": "Hi! I am Alessio a passionate",
+        "buildingGlobally": "Building globally — Fluent in",
+        "typewriter": {
+            "frontend": "Frontend Developer",
+            "llm": "LLM Developer",
+            "cv": "Computer Vision Researcher",
+            "agentic": "Agentic AI Developer",
+            "backend": "Backend Developer"
+        }
+    },
+    "Skills": {
+        "title": "My Technical Skills",
+        "subtitle": "Amid the chaos of technology, I found stability"
+    },
+    "Approach": {
+        "title": "My Approach",
+        "cards": {
+            "simple": {
+                "name": "Simple",
+                "description": "Simplicity reduces cognitive load and prevents unnecessary mistakes. When systems are clear and intuitive, teams move faster and users stay engaged"
+            },
+            "efficient": {
+                "name": "Efficient",
+                "description": "Efficiency directly impacts cost, speed, and scalability. Optimized workflows free up resources so energy can be spent on innovation instead of fixing bottlenecks"
+            },
+            "reliable": {
+                "name": "Reliable",
+                "description": "Reliability builds long-term trust. Consistent performance protects your reputation and ensures users can depend on your product when it matters most"
+            },
+            "scalable": {
+                "name": "Scalable",
+                "description": "Growth is inevitable. Scalable foundations allow products to evolve and expand without breaking under increased demand"
+            }
+        }
+    },
+    "Contact": {
+        "title": "Let's get in touch!",
+        "subtitle": "Reach out to me today and turn your ideas into impactful solutions.",
+        "copied": "Copied!"
+    },
+    "Footer": {
+        "sourceCode": "Source Code",
+        "madeBy": "Made By - Alessio Diaz Cama",
+        "copyright": "Copyright 2026. All Rights Reserved"
+    },
+    "Projects": {
+        "title": "Recent Projects"
+    }
+}
